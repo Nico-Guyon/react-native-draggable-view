@@ -149,6 +149,7 @@ export default class component extends Component {
       
           {initDrawerView.map((value, index) => {
             return <TouchableWithoutFeedback
+                key={index}
                 onPressIn={() => {
                   console.log('touch in');
                   this.setState({ touched: 'TRUE' });
