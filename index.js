@@ -38,7 +38,7 @@ export default class component extends Component {
 
 
   isAValidMovement = (distanceX, distanceY) => {
-    const moveTravelledFarEnough = Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 2;
+    const moveTravelledFarEnough = Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 5;
     return moveTravelledFarEnough;
   }
 
@@ -145,22 +145,28 @@ export default class component extends Component {
           ref={(center) => this.center = center}
           {...this._panGesture.panHandlers}
         >
-          {drawerView}
       
           {initDrawerView.map((value, index) => {
             return <TouchableWithoutFeedback
                 key={index}
+                onPress={() => {
+                  if(value.onPress){
+                    value.onPress();
+                  }
+                }}
                 onPressIn={() => {
                   console.log('touch in');
                   this.setState({ touched: 'TRUE' });
                 }}
-                onPressOut={() => {
+                onPressOut={(evt) => {
                   this.setState({ touched: 'FALSE' });
                   console.log('touch out');
                 }}>
-                {value}
+                {value.component}
               </TouchableWithoutFeedback>
           })}
+
+          {drawerView}
 
         </Animated.View>
       </View >
@@ -176,6 +182,7 @@ var styles = StyleSheet.create({
   drawer: {
     height: '100%',
     backgroundColor: 'transparent',
+    alignItems: 'center',
   },
   container: {
     position: 'absolute',
