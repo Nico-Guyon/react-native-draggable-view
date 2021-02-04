@@ -127,6 +127,14 @@ export default class component extends Component {
     this.startAnimation(100, this.state.initialPositon, this.state.finalPosition, 0, this.state.initialPositon);
   }
 
+  toggleDrawer() {
+    if(this.state.position._value === 0) {
+      this.closeDrawer();
+    } else {
+      this.openDrawer();
+    }
+  }
+
   render() {
     var containerView = this.props.renderContainerView ? this.props.renderContainerView() : null;
     var drawerView = this.props.renderDrawerView ? this.props.renderDrawerView() : null;
